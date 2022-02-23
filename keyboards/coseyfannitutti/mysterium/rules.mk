@@ -15,6 +15,7 @@ EXTRAKEY_ENABLE = yes       # Audio control and System control
 OLED_ENABLE = yes
 OLED_DRIVER = SSD1306
 WPM_ENABLE = yes
-RGBLIGHT_ENABLE = yes
+RGBLIGHT_ENABLE = no
 
 LAYOUTS = tkl_ansi
+EXTRAFLAGS += -flto
