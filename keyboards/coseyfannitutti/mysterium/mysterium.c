@@ -84,12 +84,10 @@ bool oled_task_kb(void) {
         if (get_current_wpm() <= IDLE_SPEED) {
             current_idle_frame = (current_idle_frame + 1) % IDLE_FRAMES;
             oled_write_raw_P(idle[abs((IDLE_FRAMES - 1) - current_idle_frame)], ANIM_SIZE);
-            print_wpm();
         }
 
         if (get_current_wpm() > IDLE_SPEED && get_current_wpm() < TAP_SPEED) {
             oled_write_raw_P(prep[0], ANIM_SIZE);
-            print_wpm();
         }
 
         if (get_current_wpm() >= TAP_SPEED) {
