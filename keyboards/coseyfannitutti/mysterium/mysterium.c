@@ -14,7 +14,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "mysterium.h"
-#include "kb.h"
 #include <stdio.h>
 char wpm_str[10];
 #define IDLE_FRAMES 5
@@ -85,18 +84,18 @@ bool oled_task_kb(void) {
         if (get_current_wpm() <= IDLE_SPEED) {
             current_idle_frame = (current_idle_frame + 1) % IDLE_FRAMES;
             oled_write_raw_P(idle[abs((IDLE_FRAMES - 1) - current_idle_frame)], ANIM_SIZE);
-            print_wpm()
+            print_wpm();
         }
 
         if (get_current_wpm() > IDLE_SPEED && get_current_wpm() < TAP_SPEED) {
             oled_write_raw_P(prep[0], ANIM_SIZE);
-            print_wpm()
+            print_wpm();
         }
 
         if (get_current_wpm() >= TAP_SPEED) {
             current_tap_frame = (current_tap_frame + 1) % TAP_FRAMES;
             oled_write_raw_P(tap[abs((TAP_FRAMES - 1) - current_tap_frame)], ANIM_SIZE);
-            print_wpm()
+            print_wpm();
         }
     }
 
