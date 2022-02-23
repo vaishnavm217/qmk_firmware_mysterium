@@ -75,6 +75,9 @@ bool oled_task_kb(void) {
         sprintf(wpm_str, "WPM:%03d", get_current_wpm());  // edit the string to change wwhat shows up, edit %03d to change how many digits show up
         oled_write(wpm_str, false);                       // writes wpm on top left corner of string
         
+    }
+
+    void caps_lock_print(void){
         led_t led_state = host_keyboard_led_state();  // caps lock stuff, prints CAPS on new line if caps led is on
         oled_set_cursor(0, 1);
         oled_write_P(led_state.caps_lock ? PSTR("CAPS") : PSTR("       "), false);
@@ -84,16 +87,19 @@ bool oled_task_kb(void) {
         if (get_current_wpm() <= IDLE_SPEED) {
             current_idle_frame = (current_idle_frame + 1) % IDLE_FRAMES;
             oled_write_raw_P(idle[abs((IDLE_FRAMES - 1) - current_idle_frame)], ANIM_SIZE);
+            caps_lock_print();
         }
 
         if (get_current_wpm() > IDLE_SPEED && get_current_wpm() < TAP_SPEED) {
             oled_write_raw_P(prep[0], ANIM_SIZE);
+            caps_lock_print();
         }
 
         if (get_current_wpm() >= TAP_SPEED) {
             current_tap_frame = (current_tap_frame + 1) % TAP_FRAMES;
             oled_write_raw_P(tap[abs((TAP_FRAMES - 1) - current_tap_frame)], ANIM_SIZE);
             print_wpm();
+            caps_lock_print();
         }
     }
 
