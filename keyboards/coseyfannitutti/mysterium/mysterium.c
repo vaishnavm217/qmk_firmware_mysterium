@@ -72,8 +72,8 @@ bool oled_task_kb(void) {
 
     void print_wpm(void){
         oled_set_cursor(0, 0);                            // sets cursor to (row, column) using charactar spacing (5 rows on 128x32 screen, anything more will overflow back to the top)
-        sprintf(wpm_str, "WPM:%03d", get_current_wpm());  // edit the string to change wwhat shows up, edit %03d to change how many digits show up
-        oled_write(wpm_str, false);                       // writes wpm on top left corner of string
+        oled_write_P(PSTR("WPM: "), ());  // edit the string to change wwhat shows up, edit %03d to change how many digits show up
+        oled_write(get_u8_str(get_current_wpm(), ' '), false);                       // writes wpm on top left corner of string
         
     }
 
